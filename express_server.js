@@ -21,11 +21,13 @@ function generateRandomString() {
 console.log(generateRandomString());
 
 
-/////////////////// added later
+///////////////////
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 ///////////////////
 
+// Routes
+// => homepage
 app.get("/", (req, res) => {
   res.send("Hello!");
 });
@@ -38,27 +40,21 @@ app.get("/hello", (req, res) => {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
 });
 
+// urls
  app.get("/urls", (req, res) => {
   const templateVars = { urls: urlDatabase };
   res.render("urls_index", templateVars);
 });
 
+// urls/new => page to create a shortURL
 app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
 
+// urls/:shortURL => page go to specific shortURL
 app.get("/urls/:shortURL", (req, res) => {
   const templateVars = { shortURL: req.params.shortURL, longURL:urlDatabase[req.params.shortURL]};
   res.render("urls_show", templateVars);
-});
-
-app.post("/urls", (req, res) => {
-  //console.log("body",req.body);  // Log the POST request body to the console
-  //res.send("Ok");         // Respond with 'Ok' (we will replace this)
-  const longURL = req.body.longURL;
-  const shortURL = generateRandomString();
-  urlDatabase[shortURL] = longURL;
-  res.redirect(`/urls/${shortURL}`);
 });
 
 app.get("/u/:shortURL", (req, res) => {
@@ -66,6 +62,30 @@ app.get("/u/:shortURL", (req, res) => {
   res.redirect(longURL);
 });
 
+app.post("/urls", (req, res) => {
+  ////////////first exercise ///////////////
+  //console.log("body",req.body);  // Log the POST request body to the console
+  //res.send("Ok");         // Respond with 'Ok' (we will replace this)
+  //////////////////////////////////////////
+  let shortURL = generateRandomString();
+  let longURL = req.body.longURL;
+  urlDatabase[shortURL] = longURL;
+  console.log(urlDatabase);
+  res.redirect(`/urls/${shortURL}`);
+  // let newShortURL = generateRandomString();
+  // let newLongURL = req.body.longURL;
+  // urlDatabase[newShortURL] = newLongURL;
+  // console.log(urlDatabase);
+});
+
+// after urls_index add "delete" button
+app.post("/urls/:shortURL/delete", (req, res) => {
+  console.log([req.params]);
+  delete urlDatabase[req.params.shortURL];
+  res.redirect("/urls");
+})
+
+// server is listening
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
