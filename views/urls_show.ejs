@@ -20,8 +20,9 @@
         <p class="card-text">Short URL: <a href="/u/<%= shortURL %>"><%= shortURL %></a></p>
       </div>
 
-      <div class="card-body">
-        <h3 class="card-title">Edit</h3>
+      <div class="card-footer text-muted">
+        <h2 class="card-title">Edit</h2>
+
         <form class="form-inline" method="POST" action="/urls/<%= shortURL %>/">
           <div class="form-group mb-2">
             <label for="newLongURL">New URL:</label>
@@ -31,7 +32,7 @@
         </form>
       </div>
       
-    <div class="card-footer text-muted"></div>
+    
   </div>
 
   <!-- Bootstrap JS -->
