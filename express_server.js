@@ -78,6 +78,16 @@ app.post("/urls", (req, res) => {
   // console.log(urlDatabase);
 });
 
+// add a route to handle POST request to update a resource
+app.post("/urls/:id", (req, res) => {
+  const shortURL = req.params.id;
+  const newlongURL = req.body.newlongURL;
+  urlDatabase[shortURL] = newlongURL;
+  res.redirect('/urls');
+})
+
+
+
 // after urls_index add "delete" button
 app.post("/urls/:shortURL/delete", (req, res) => {
   console.log([req.params]);
