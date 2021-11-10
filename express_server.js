@@ -86,6 +86,11 @@ app.post("/urls/:id", (req, res) => {
   res.redirect('/urls');
 })
 
+// add a route for adding username and login 
+app.post("/login", (req, res) => {
+res.cookie("username", req.body.username);
+res.redirect("/urls");
+})
 
 
 // after urls_index add "delete" button
