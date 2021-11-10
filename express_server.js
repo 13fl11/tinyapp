@@ -77,10 +77,6 @@ app.post("/urls", (req, res) => {
   urlDatabase[shortURL] = longURL;
   console.log(urlDatabase);
   res.redirect(`/urls/${shortURL}`);
-  // let newShortURL = generateRandomString();
-  // let newLongURL = req.body.longURL;
-  // urlDatabase[newShortURL] = newLongURL;
-  // console.log(urlDatabase);
 });
 
 // add a route to handle POST request to update a resource
