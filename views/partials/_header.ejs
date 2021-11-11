@@ -14,23 +14,21 @@
       </div>
     </div>
 
-    <% if (username) { %>
+    <% if (user) { %>
       <form class="form-inline" method="POST" action="/logout">
         <div class="form group mr-1">
-          <p class="card-text"> Logged In As: <%= username %>!
+          <p class="card-text"> Logged In As: <%= user.email %>
             <button type="logout" class="btn btn-outline-dark ml-3">Logout</button>
           </p>
         </div>
       </form>
       <% } else { %>
-      <form class="form-inline" method="POST" action="/login">
-        <div class="form group mr-1">
-          <p class="card-text">
-            <input class="form-control" type="text" name="username" placeholder="Username" style="width:200px">
-            <button type="login" class="btn btn-outline-dark">Login</button>
-          </p>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/login" style="margin: 1em">Login</a>
+            <a class="nav-item nav-link" href="/register" style="margin: 1em">Register</a>
+          </div>
         </div>
-      </form>
       <% } %>
 
 
